@@ -2,6 +2,16 @@ $(document).ready(function() {
 	loadToDB();
 	drawMealsList();
 	drawMenus();
+	$('body').on('click', '.menuAction', function (e){
+		e.preventDefault();
+        Menu.doAction($(this).data("id"), $(this).data("action"));
+        drawMenus();
+    });
+	$('body').on('click', '.mealToAdd', function (e){
+		e.preventDefault();
+		alert($(this).data("key"));
+        drawMenus();
+    });    
 });
 
 function drawMealsList() {

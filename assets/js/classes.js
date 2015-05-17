@@ -11,7 +11,7 @@ function Meal(id, name, description, calories, image) {
 	this.image = (image == undefined ? "" : image);
 	this.draw = function() {
 		var buffer = [];
-		buffer.push('<div data-key="' + this.id + '">');
+		buffer.push('<div data-key="' + this.id + '" class="mealToAdd">');
 		buffer.push('	<span class="name-meal">');
 		buffer.push(this.name);
 		buffer.push('	</span>');
@@ -21,6 +21,14 @@ function Meal(id, name, description, calories, image) {
 		buffer.push('</div>');
 		return buffer.join("");
 	} 
+}
+
+Meal.findById = function(meal_id) {
+	for (var i = 0; i < database.meals.length; i++) {
+		if (database.meals[i] == parseInt(meal_id)) {
+			return database.meals[i];
+		}
+	};
 }
 
 
@@ -87,19 +95,18 @@ function Menu(id, name,days) {
 	this.name = name;
 	this.days = days;
 	this.domListId = domIds.menu.id;
-	this.clear = function() {
-		// reset menu
-	};
-	this.save = function() {
-		// save menu
-	};
-	this.print = function() {
-		//print menu
-	}
 
 	this.draw = function() {
 		var buffer = [];
 		buffer.push('<div id="menu1" class="single-menu">');
+		buffer.push(this.drawTable());
+		buffer.push(this.drawButtons());
+		buffer.push('</div>');
+		return buffer.join("");
+	}
+
+	this.drawTable = function() {
+		var buffer = [];
 		buffer.push('	<table border="0">');
 		buffer.push(this.drawTableHead());
 		buffer.push(this.drawBreakfastRow());
@@ -109,8 +116,6 @@ function Menu(id, name,days) {
 		buffer.push(this.drawDinnerRow());
 		buffer.push(this.drawTotalRow());
 		buffer.push('	</table>');
-		buffer.push(this.drawButtons());
-		buffer.push('</div>');
 		return buffer.join("");
 	}
 
@@ -188,13 +193,75 @@ function Menu(id, name,days) {
 	this.drawButtons = function() {
 		var buffer = [];
         buffer.push('<div class="col-md-6 buttons-bar col-md-offset-6">');
-		buffer.push('<a href="#" class="myButton">' + domIds.menu.resetButton + '</a>');
-		buffer.push('<a href="#" class="myButton">' + domIds.menu.saveButton + '</a>');
-		buffer.push('<a href="#" class="myButton">' + domIds.menu.printButton + '</a>');
+		buffer.push('<a href="#" data-id="' + this.id + '" data-action="clear" class="myButton menuAction">' + domIds.menu.resetButton + '</a>');
+		buffer.push('<a href="#" data-id="' + this.id + '" data-action="save" class="myButton menuAction">' + domIds.menu.saveButton + '</a>');
+		buffer.push('<a href="#" data-id="' + this.id + '" data-action="print" class="myButton menuAction">' + domIds.menu.printButton + '</a>');
         buffer.push('</div>');
         return buffer.join("");
 	}
 
+}
+
+Menu.findById = function(menu_id) {
+	for (var i = 0; i < database.menus.length; i++) {
+		if (database.menus[i] == parseInt(menu_id)) {
+			return database.menus[i];
+		}
+	};
+}
+
+Menu.clear = function(menu_id) {
+	var c = collations[0];
+	var collation;
+	for (var i = database.meals.length - 1; i >= 0; i--) {
+		if (database.meals[i] instanceof Collation) {
+			collation = database.meals[i];
+			break;
+		}
+	};
+	for (var i = 0; i < database.menus.length; i++) {
+		var menu = database.menus[i];
+		if (menu.id === parseInt(menu_id)){
+			var days = [];
+			for (var j = 0; j < menu.days.length; j++) {
+				var day = new Day(j+1,menu.days[j].name, null, null, null, collation, collation);
+				days.push(day);
+			};
+			menu.days = days;
+			break;
+		}
+	};
+}
+
+Menu.save = function(menu_id) {
+
+}
+
+Menu.print = function(menu_id) {
+
+}
+
+Menu.doAction = function(menu_id, action) {
+	switch(action) {
+    case 'clear':
+        Menu.clear(menu_id);
+        break;
+    case 'save':
+        Menu.save(menu_id);
+        break;
+    case 'print':
+    	Menu.print(menu_id);
+    	break;
+    default:
+        return false;
+	}
+}
+
+Menu.addMeal = function(menu_id, meal_id, day_id) {
+	var mealToAdd = Meal.findById(meal_id);
+	var menu = Menu.findById(menu_id);
+	var day = Day.findInMenu(menu, day_id);
+	day.addMeal(meal);
 }
 
 
@@ -220,6 +287,26 @@ function Day(id, name, breakfast, lunch, dinner, first_collation, second_collati
 		return buffer.join("")
 
 	}
+
+	this.addMeal = function(meal) {
+		if (meal instanceof BreakFast && this.breakfast.id == undefined) {
+			this.breakfast = meal;
+		}
+		if (meal instanceof Lunch && this.lunch.id == undefined) {
+			this.lunch = meal;
+		}
+		if (meal instanceof Dinner && this.dinner.id == undefined) {
+			this.dinner = meal;
+		}				
+	}
+}
+
+Day.findInMenu = function(menu, day_id) {
+	for (var i = 0; i < menu.days.length; i++) {
+		if(menu.days[i] == parseInt(day_id)){
+			return menu.days[i];
+		}
+	};
 }
 
 
