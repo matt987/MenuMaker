@@ -3,9 +3,16 @@
 var database = {meals: [],menus: []}; 
 
 var domIds = {
-	breakfast: {id: "breakfast-list", title: "Desayuno"},
-	lunch: {id: "lunch-list", title: "Almuerzo"},
-	dinner: {id: "dinner-list", title: "Cena"}
+	meal: {id: "meal-list"},
+	breakfast: {id: "breakfast-list", title: "Desayuno", tableTitle: "Desayuno 50 Kcal"},
+	lunch: {id: "lunch-list", title: "Almuerzo", tableTitle: "Comida 80 Kcal"},
+	dinner: {id: "dinner-list", title: "Cena", tableTitle: "Cena 70 Kcal"},
+	menu: { id: "menu-list", 
+			totalHead :"Total Kcal", 
+			resetButton: '<i class="fa fa-cog fa-spin"></i> Resetear/limpiar', 
+			printButton: '<i class="fa fa-print"></i> Imprimir', 
+			saveButton: '<i class="fa fa-floppy-o"></i> Guardar'},
+	collation: {tableTitle: "Colación"}
 }
 
 //url de las imagenes de las comidas

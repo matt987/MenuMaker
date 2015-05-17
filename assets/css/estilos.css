@@ -43,6 +43,98 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f5fbff', end
 	border: 1px solid #E4E4E4;
 }
 
+.menu-cell {
+	background-color:#2979b6; 
+	color:#fff; 
+	font-family:'Trebuchet MS', Arial, Helvetica, sans-serif; 
+	text-align:center;
+}
+
+.menu-name {
+	background-color:#fff; 
+	color:#09C;
+}
+
+.total-name {
+	background-color:#226CA4; 
+	color:#fff; 
+	font-family:'Trebuchet MS', Arial, Helvetica, sans-serif; 
+	text-align:center; 
+	font-weight:lighter; 
+}
+
+.total-cell {
+	background-color:#2f7eb9; 
+	color:#fff; 
+	font-family:'Trebuchet MS', Arial, Helvetica, sans-serif; 
+	text-align:center; 
+}
+
+.meal-cell {
+	width:80px; 
+	height:91px;
+}
+
+.breakfast-head {
+	background-color:#ED9713; 
+	color:#fff; 
+	font-family:'Trebuchet MS', Arial, Helvetica, sans-serif; 
+	text-align:center; 
+	font-weight:lighter;
+}
+
+.breakfast-cell {
+	background-color:#fba31b; 
+	color:#fff; 
+	font-family:'Trebuchet MS', Arial, Helvetica, sans-serif; 
+	text-align:center;
+}
+
+.collation-head {
+	background-color:#D56B15; 
+	color:#fff; 
+	font-family:'Trebuchet MS', Arial, Helvetica, sans-serif; 
+	text-align:center; 
+	font-weight:lighter;
+}
+
+.collation-cell {
+	background-color:#f58020; 
+	color:#fff; 
+	font-family:'Trebuchet MS', Arial, Helvetica, sans-serif; 
+	text-align:center;
+}
+
+.lunch-head {
+	background-color:#047A77; 
+	color:#fff; 
+	font-family:'Trebuchet MS', Arial, Helvetica, sans-serif; 
+	text-align:center; 
+	font-weight:lighter;
+}
+
+.lunch-cell {
+	background-color:#047A77; 
+	color:#fff; 
+	font-family:'Trebuchet MS', Arial, Helvetica, sans-serif; 
+	text-align:center; 
+	font-weight:lighter;
+}
+
+.dinner-head {
+	background-color:#4C4B85; 
+	color:#fff; 
+	font-family:'Trebuchet MS', Arial, Helvetica, sans-serif; 
+	text-align:center; 
+	font-weight:lighter;
+}
+
+.dinner-cell {
+	background-color:#59589a; 
+	color:#fff; 
+	font-family:'Trebuchet MS', Arial, Helvetica, sans-serif; 
+	text-align:center;
+}
 .myButton {
 	-moz-box-shadow:inset 0px 1px 0px 0px #54a3f7;
 	-webkit-box-shadow:inset 0px 1px 0px 0px #54a3f7;

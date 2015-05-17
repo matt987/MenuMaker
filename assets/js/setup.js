@@ -1,7 +1,7 @@
 $(document).ready(function() {
 	loadToDB();
 	drawMealsList();
-	//	drawMenus();
+	drawMenus();
 });
 
 function drawMealsList() {
@@ -15,7 +15,7 @@ function drawMealsList() {
 	buffer.push('<div class="col-md-3" id="' + domIds.dinner.id + '">');
 	buffer.push('	<h4 class="title-meal">' + domIds.dinner.title + '</h4>');
 	buffer.push('</div>  ');
-	$("#meal-list").html(buffer.join(""));
+	$("#" + domIds.meal.id).html(buffer.join(""));
 	for (var i = database.meals.length - 1; i >= 0; i--) {
 		$("#" + database.meals[i].domListId).append(database.meals[i].draw());
 	};
@@ -24,11 +24,10 @@ function drawMealsList() {
 
 function drawMenus() {
 	var buffer = [];
-	buffer.push('<div class="row">');
-	buffer.push('<div class="col-md-12">');
-	buffer.push('</div>');
-	buffer.push('</div>');
-	$("#menu-list").html(buffer.join(""));
+	for (var i = 0; i < database.menus.length; i++) {
+		buffer.push(database.menus[i].draw());
+	};
+	$("#" + domIds.menu.id).html(buffer.join(""));
 }
 
 //Carga todos los datos del config.js
@@ -46,12 +45,13 @@ function loadToDB() {
 	//Esto agrega la primer comida de colacion a la base de datos, no se tienen en cuenta si existieran mas.
 	var c = collations[0];
 	var key = database.meals.length + 1;
-	database.meals.push(new Collation(key, c.name, c.description, c.calories, c.image))	
+	var collation = new Collation(key, c.name, c.description, c.calories, c.image);
+	database.meals.push(collation)	
 
 	for (var i = 0; i < menus.length; i++) {
 		var days = [];
 		for (var j = 0; j < menus[i].days.length; j++) {
-			var day = new Day(j+1,menus[i].days[j]);
+			var day = new Day(j+1,menus[i].days[j], null, null, null, collation, collation);
 			days.push(day);
 		};
 		var key = database.menus.length + 1;
