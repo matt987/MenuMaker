@@ -11,7 +11,7 @@ function Meal(id, name, description, calories, image) {
 	this.image = (image == undefined ? "" : image);
 	this.draw = function() {
 		var buffer = [];
-		buffer.push('<div data-key="' + this.id + '" class="mealToAdd">');
+		buffer.push('<div data-key="' + this.id + '" class="mealToAdd draggable drag-drop">');
 		buffer.push('	<span class="name-meal">');
 		buffer.push(this.name);
 		buffer.push('	</span>');
