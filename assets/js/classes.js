@@ -25,7 +25,7 @@ function Meal(id, name, description, calories, image) {
 
 Meal.findById = function(meal_id) {
 	for (var i = 0; i < database.meals.length; i++) {
-		if (database.meals[i] == parseInt(meal_id)) {
+		if (database.meals[i].id == parseInt(meal_id)) {
 			return database.meals[i];
 		}
 	};
@@ -204,7 +204,7 @@ function Menu(id, name,days) {
 
 Menu.findById = function(menu_id) {
 	for (var i = 0; i < database.menus.length; i++) {
-		if (database.menus[i] == parseInt(menu_id)) {
+		if (database.menus[i].id == parseInt(menu_id)) {
 			return database.menus[i];
 		}
 	};
@@ -234,11 +234,25 @@ Menu.clear = function(menu_id) {
 }
 
 Menu.save = function(menu_id) {
-
+	var menu = Menu.findById(menu_id);
+	console.log(menu);
+	$.ajax({
+	  type: "POST",
+	  url: url_actions.saveMenu,
+	  data: JSON.stringify(menu),
+	  dataType: 'html'
+	});
 }
 
 Menu.print = function(menu_id) {
-
+	var menu = Menu.findById(menu_id);
+	console.log(menu);
+	$.ajax({
+	  type: "POST",
+	  url: url_actions.printMenu,
+	  data: JSON.stringify(menu),
+	  dataType: 'html'
+	});
 }
 
 Menu.doAction = function(menu_id, action) {
@@ -261,7 +275,9 @@ Menu.addMeal = function(menu_id, meal_id, day_id) {
 	var mealToAdd = Meal.findById(meal_id);
 	var menu = Menu.findById(menu_id);
 	var day = Day.findInMenu(menu, day_id);
-	day.addMeal(meal);
+	day.addMeal(mealToAdd);
+	console.log(Menu.findById(menu_id));
+
 }
 
 
@@ -289,21 +305,25 @@ function Day(id, name, breakfast, lunch, dinner, first_collation, second_collati
 	}
 
 	this.addMeal = function(meal) {
+		console.log(meal)
 		if (meal instanceof BreakFast && this.breakfast.id == undefined) {
 			this.breakfast = meal;
+			console.log("b");
 		}
 		if (meal instanceof Lunch && this.lunch.id == undefined) {
 			this.lunch = meal;
+			console.log("l");
 		}
 		if (meal instanceof Dinner && this.dinner.id == undefined) {
 			this.dinner = meal;
+			console.log("d");
 		}				
 	}
 }
 
 Day.findInMenu = function(menu, day_id) {
 	for (var i = 0; i < menu.days.length; i++) {
-		if(menu.days[i] == parseInt(day_id)){
+		if(menu.days[i].id == parseInt(day_id)){
 			return menu.days[i];
 		}
 	};

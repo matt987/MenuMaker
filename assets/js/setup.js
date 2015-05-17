@@ -9,7 +9,7 @@ $(document).ready(function() {
     });
 	$('body').on('click', '.mealToAdd', function (e){
 		e.preventDefault();
-		alert($(this).data("key"));
+		Menu.addMeal(1, $(this).data("key"), 1);
         drawMenus();
     });    
 });

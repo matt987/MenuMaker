@@ -2,6 +2,10 @@
 //Esta variable es la base de datos, no modificar
 var database = {meals: [],menus: []}; 
 
+var url_actions = {
+	saveMenu: "http://httpbin.org/post",
+	printMenu: "http://httpbin.org/post",
+}
 var domIds = {
 	meal: {id: "meal-list"},
 	breakfast: {id: "breakfast-list", title: "Desayuno", tableTitle: "Desayuno 50 Kcal"},
