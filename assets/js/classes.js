@@ -3,12 +3,13 @@
 * Meal class
 *
 **/
-function Meal(id, name, description, calories, image) {
+function Meal(id, name, description, calories, image, className) {
 	this.id = id;
 	this.name = (name == undefined ? "" : name); 
 	this.description = (description == undefined ? "" : description); 
 	this.calories = (calories == undefined ? 0 : calories); 
 	this.image = (image == undefined ? "" : image);
+	this.className = className;
 	this.draw = function() {
 		var buffer = [];
 		buffer.push('<div data-key="' + this.id + '" class="mealToAdd draggable drag-drop">');
@@ -38,7 +39,7 @@ Meal.findById = function(meal_id) {
 *
 **/
 function BreakFast(id, name, description, calories, image) {
-	Meal.call(this, id, name, description, calories, image);
+	Meal.call(this, id, name, description, calories, image, 'breakfastMeal');
 	this.domListId = domIds.breakfast.id;
 }
 BreakFast.prototype = Object.create(Meal.prototype);    
@@ -51,7 +52,7 @@ BreakFast.prototype.constructor = BreakFast;
 *
 **/
 function Lunch(id, name, description, calories, image) {
-	Meal.call(this, id, name, description, calories, image);
+	Meal.call(this, id, name, description, calories, image, 'lunchMeal');
 	this.domListId = domIds.lunch.id;
 }
 Lunch.prototype = Object.create(Meal.prototype);    
@@ -64,7 +65,7 @@ Lunch.prototype.constructor = Lunch;
 *
 **/
 function Dinner(id, name, description, calories, image) {
-	Meal.call(this, id, name, description, calories, image);
+	Meal.call(this, id, name, description, calories, image, 'dinnerMeal');
 	this.domListId = domIds.dinner.id;
 }
 Dinner.prototype = Object.create(Meal.prototype);    
@@ -77,7 +78,7 @@ Dinner.prototype.constructor = Dinner;
 *
 **/
 function Collation(id, name, description, calories, image) {
-	Meal.call(this, id, name, description, calories, image);
+	Meal.call(this, id, name, description, calories, image, 'collationMeal');
 	this.draw = function() {
 		return this.name;
 	}
@@ -137,7 +138,7 @@ function Menu(id, name,days) {
 		buffer.push('<td class="breakfast-head">' + domIds.breakfast.tableTitle + '</td>');
 		for (var i = 0; i < this.days.length; i++) {
 			var day = this.days[i];
-			buffer.push('<td class="breakfast-cell">' + day.breakfast.draw() + '</td>');
+			buffer.push('<td data-class="' + domIds.breakfast.className + '" data-menu="' + this.id + '" data-day="' + day.id + '" class="breakfast-cell dropzone">' + day.breakfast.draw() + '</td>');
 		};
 		buffer.push('</tr>');
 		return buffer.join("");
@@ -148,7 +149,7 @@ function Menu(id, name,days) {
 		buffer.push('<td class="lunch-head">' + domIds.lunch.tableTitle + '</td>');
 		for (var i = 0; i < this.days.length; i++) {
 			var day = this.days[i];
-			buffer.push('<td class="lunch-cell">' + day.lunch.draw() + '</td>');
+			buffer.push('<td  data-class="' + domIds.lunch.className + '" data-menu="' + this.id + '" data-day="' + day.id + '"  class="lunch-cell dropzone">' + day.lunch.draw() + '</td>');
 		};		
 		buffer.push('</tr>');
 		return buffer.join("");
@@ -159,7 +160,7 @@ function Menu(id, name,days) {
 		buffer.push('<td class="dinner-head">' + domIds.dinner.tableTitle + '</td>');
 		for (var i = 0; i < this.days.length; i++) {
 			var day = this.days[i];
-			buffer.push('<td class="dinner-cell">' + day.dinner.draw() + '</td>');
+			buffer.push('<td  data-class="' + domIds.dinner.className + '" data-menu="' + this.id + '" data-day="' + day.id + '" class="dinner-cell dropzone">' + day.dinner.draw() + '</td>');
 		};		
 		buffer.push('</tr>');		
 		return buffer.join("");
@@ -295,6 +296,11 @@ function Day(id, name, breakfast, lunch, dinner, first_collation, second_collati
 	this.first_collation = (first_collation instanceof Collation ? first_collation : new Collation());
 	this.second_collation = (second_collation instanceof Collation ? second_collation : new Collation());
 	this.totalCalories = function() {
+		console.log(this.breakfast.calories)
+		console.log(this.lunch.calories)
+		console.log(this.dinner.calories)
+		console.log(this.first_collation.calories)
+		console.log(this.second_collation.calories)
 		return this.breakfast.calories + this.lunch.calories + this.lunch.calories + this.first_collation.calories + this.second_collation.calories;
 	}
 

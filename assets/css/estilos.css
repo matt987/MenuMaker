@@ -41,6 +41,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f5fbff', end
 .single-menu {
 	margin-bottom: 80px;
 	border: 1px solid #E4E4E4;
+	z-index: -1;
 }
 
 .menu-cell {
@@ -134,6 +135,12 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f5fbff', end
 	color:#fff; 
 	font-family:'Trebuchet MS', Arial, Helvetica, sans-serif; 
 	text-align:center;
+}
+
+.draggable{
+	display: inline-block;
+  -webkit-transform: translate(0px, 0px);
+          transform: translate(0px, 0px);	
 }
 .myButton {
 	-moz-box-shadow:inset 0px 1px 0px 0px #54a3f7;

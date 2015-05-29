@@ -7,37 +7,26 @@ $(document).ready(function() {
         Menu.doAction($(this).data("id"), $(this).data("action"));
         drawMenus();
     });
-	$('body').on('click', '.mealToAdd', function (e){
-		e.preventDefault();
-		Menu.addMeal(1, $(this).data("key"), 1);
-        drawMenus();
-    });    
 
-
-// target elements with the "draggable" class
 interact('.draggable')
   .draggable({
-    // enable inertial throwing
     inertia: true,
-    // keep the element within the area of it's parent
-    restrict: {
-      restriction: "parent",
-      endOnly: true,
-      elementRect: { top: 0, left: 0, bottom: 1, right: 1 }
-    },
-
-    // call this function on every dragmove event
     onmove: dragMoveListener,
-    // call this function on every dragend event
     onend: function (event) {
-      var textEl = event.target.querySelector('p');
-
-      textEl && (textEl.textContent =
-        'moved a distance of '
-        + (Math.sqrt(event.dx * event.dx +
-                     event.dy * event.dy)|0) + 'px');
+    	var target = event.target;
+    	target.style.transform = 'translate(' + event.x0 + 'px, ' + event.y0 + 'px)';
+    	drawMealsList();
     }
   });
+interact('.dropzone').dropzone({
+  ondrop: function (event) {  
+    var meal_id = event.relatedTarget.getAttribute('data-key');
+    var menu_id = event.target.getAttribute('data-menu');
+    var day_id = event.target.getAttribute('data-day');
+    Menu.addMeal(parseInt(menu_id), parseInt(meal_id), parseInt(day_id));
+    drawMenus();
+  }
+});
 
    function dragMoveListener (event) {
     var target = event.target,
@@ -47,8 +36,7 @@ interact('.draggable')
 
     // translate the element
     target.style.webkitTransform =
-    target.style.transform =
-      'translate(' + x + 'px, ' + y + 'px)';
+    target.style.transform = 'translate(' + x + 'px, ' + y + 'px)';
 
     // update the posiion attributes
     target.setAttribute('data-x', x);
