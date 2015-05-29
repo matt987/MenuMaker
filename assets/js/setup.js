@@ -20,10 +20,14 @@ interact('.draggable')
   });
 interact('.dropzone').dropzone({
   ondrop: function (event) {  
-    var meal_id = event.relatedTarget.getAttribute('data-key');
-    var menu_id = event.target.getAttribute('data-menu');
-    var day_id = event.target.getAttribute('data-day');
-    Menu.addMeal(parseInt(menu_id), parseInt(meal_id), parseInt(day_id));
+    var relatedTargetClass = event.relatedTarget.getAttribute('data-class');
+    var targetClass = event.target.getAttribute('data-class');
+    if (relatedTargetClass == targetClass){
+      var meal_id = event.relatedTarget.getAttribute('data-key');
+      var menu_id = event.target.getAttribute('data-menu');
+      var day_id = event.target.getAttribute('data-day');
+      Menu.addMeal(parseInt(menu_id), parseInt(meal_id), parseInt(day_id));
+    }
     drawMenus();
   }
 });

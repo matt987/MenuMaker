@@ -12,7 +12,7 @@ function Meal(id, name, description, calories, image, className) {
 	this.className = className;
 	this.draw = function() {
 		var buffer = [];
-		buffer.push('<div data-key="' + this.id + '" class="mealToAdd draggable drag-drop">');
+		buffer.push('<div data-class="' + this.className + '" data-key="' + this.id + '" class="mealToAdd draggable drag-drop">');
 		buffer.push('	<span class="name-meal">');
 		buffer.push(this.name);
 		buffer.push('	</span>');
@@ -39,7 +39,7 @@ Meal.findById = function(meal_id) {
 *
 **/
 function BreakFast(id, name, description, calories, image) {
-	Meal.call(this, id, name, description, calories, image, 'breakfastMeal');
+	Meal.call(this, id, name, description, calories, image, domIds.breakfast.className);
 	this.domListId = domIds.breakfast.id;
 }
 BreakFast.prototype = Object.create(Meal.prototype);    
@@ -52,7 +52,7 @@ BreakFast.prototype.constructor = BreakFast;
 *
 **/
 function Lunch(id, name, description, calories, image) {
-	Meal.call(this, id, name, description, calories, image, 'lunchMeal');
+	Meal.call(this, id, name, description, calories, image, domIds.lunch.className);
 	this.domListId = domIds.lunch.id;
 }
 Lunch.prototype = Object.create(Meal.prototype);    
@@ -65,7 +65,7 @@ Lunch.prototype.constructor = Lunch;
 *
 **/
 function Dinner(id, name, description, calories, image) {
-	Meal.call(this, id, name, description, calories, image, 'dinnerMeal');
+	Meal.call(this, id, name, description, calories, image, domIds.dinner.className);
 	this.domListId = domIds.dinner.id;
 }
 Dinner.prototype = Object.create(Meal.prototype);    
@@ -78,7 +78,7 @@ Dinner.prototype.constructor = Dinner;
 *
 **/
 function Collation(id, name, description, calories, image) {
-	Meal.call(this, id, name, description, calories, image, 'collationMeal');
+	Meal.call(this, id, name, description, calories, image, domIds.collation.className);
 	this.draw = function() {
 		return this.name;
 	}
