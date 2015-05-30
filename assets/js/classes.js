@@ -5,10 +5,10 @@
 **/
 function Meal(id, name, description, calories, image, className) {
 	this.id = id;
-	this.name = (name == undefined ? "" : name); 
-	this.description = (description == undefined ? "" : description); 
-	this.calories = (calories == undefined ? 0 : calories); 
-	this.image = (image == undefined ? "" : image);
+	this.name = (typeof(name) == "undefined" ? "" : name); 
+	this.description = (typeof(description) == "undefined" ? "" : description); 
+	this.calories = (typeof(calories) == "undefined" ? 0 : calories); 
+	this.image = (typeof(image) == "undefined" ? "" : image);
 	this.className = className;
 	this.draw = function(menu_id, day_id) {
 		var data = "";
@@ -189,6 +189,7 @@ function Menu(id, name,days) {
 		buffer.push('<td  class="total-name">' + domIds.menu.totalHead + '</td>')		
 		for (var i = 0; i < this.days.length; i++) {
 			var day = this.days[i];
+			console.log(day.totalCalories() + " >>>>>>>>>>>");
 			buffer.push('<td  class="total-cell">' + day.totalCalories() + '</td>');
 		};		
 		buffer.push("</tr>");
@@ -306,12 +307,7 @@ function Day(id, name, breakfast, lunch, dinner, first_collation, second_collati
 	this.first_collation = (first_collation instanceof Collation ? first_collation : new Collation());
 	this.second_collation = (second_collation instanceof Collation ? second_collation : new Collation());
 	this.totalCalories = function() {
-		
-		
-		
-		
-		
-		return this.breakfast.calories + this.lunch.calories + this.lunch.calories + this.first_collation.calories + this.second_collation.calories;
+		return this.breakfast.calories + this.lunch.calories + this.dinner.calories + this.first_collation.calories + this.second_collation.calories;
 	}
 
 	this.draw = function() {
