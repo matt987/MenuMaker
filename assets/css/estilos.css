@@ -46,7 +46,10 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f5fbff', end
 }
 
 #menu-list {
-	z-index: -1;
+	z-index: 0;
+}
+#meal-list {
+	z-index: 1;
 }
 
 .menu-cell {
