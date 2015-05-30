@@ -40,6 +40,19 @@ interact('.dropzone').dropzone({
   }
 });
 
+interact('.trash').dropzone({
+  ondrop: function (event) {  
+    var related_menu_id = event.relatedTarget.getAttribute('data-menu');
+    var related_day_id = event.relatedTarget.getAttribute('data-day');
+    var meal_id = event.relatedTarget.getAttribute('data-key');
+
+    if (related_day_id && related_menu_id){
+      Menu.removeMeal(related_menu_id, meal_id, related_day_id);
+    }
+    drawMenus();
+  }
+});
+
    function dragMoveListener (event) {
     var target = event.target,
         // keep the dragged position in the data-x/data-y attributes

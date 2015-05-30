@@ -197,7 +197,8 @@ function Menu(id, name,days) {
 
 	this.drawButtons = function() {
 		var buffer = [];
-        buffer.push('<div class="col-md-6 buttons-bar col-md-offset-6">');
+        buffer.push('<div class="col-md-10 buttons-bar col-md-offset-2">');
+        buffer.push('<div class="trash col-md-4">' + domIds.menu.trash +'</div>')
 		buffer.push('<a href="#" data-id="' + this.id + '" data-action="clear" class="myButton menuAction">' + domIds.menu.resetButton + '</a>');
 		buffer.push('<a href="#" data-id="' + this.id + '" data-action="save" class="myButton menuAction">' + domIds.menu.saveButton + '</a>');
 		buffer.push('<a href="#" data-id="' + this.id + '" data-action="print" class="myButton menuAction">' + domIds.menu.printButton + '</a>');

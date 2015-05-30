@@ -43,7 +43,6 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f5fbff', end
 
 .single-menu {
 	margin-bottom: 80px;
-	border: 1px solid #E4E4E4;
 	z-index: -1;
 }
 
@@ -152,6 +151,20 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f5fbff', end
 	display: inline-block;
   -webkit-transform: translate(0px, 0px);
           transform: translate(0px, 0px);	
+}
+.trash {
+	border: 1px solid #124d77;
+	height: 28px;
+  	border-radius: 3px;
+	border: 1px dotted #999;
+  	display: inline-block;
+  	font-family: Arial;
+  	font-size: 10px;
+  	color: #999;
+  	padding: 6px 18px;
+  	text-decoration: none;
+  	min-width: 89px;
+  	text-align: center;	
 }
 .myButton {
 	-moz-box-shadow:inset 0px 1px 0px 0px #54a3f7;

@@ -13,6 +13,7 @@ var domIds = {
 	dinner: {id: "dinner-list", title: "Cena", tableTitle: "Cena 70 Kcal", className: "dinnerMeal"},
 	menu: { id: "menu-list", 
 			totalHead :"Total Kcal", 
+			trash: '<i class="fa fa-cog fa-trash"></i> Arrastre aquí para eliminar',
 			resetButton: '<i class="fa fa-cog fa-spin"></i> Resetear/limpiar', 
 			printButton: '<i class="fa fa-print"></i> Imprimir', 
 			saveButton: '<i class="fa fa-floppy-o"></i> Guardar'},
