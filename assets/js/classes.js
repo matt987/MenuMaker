@@ -10,9 +10,13 @@ function Meal(id, name, description, calories, image, className) {
 	this.calories = (calories == undefined ? 0 : calories); 
 	this.image = (image == undefined ? "" : image);
 	this.className = className;
-	this.draw = function() {
+	this.draw = function(menu_id, day_id) {
+		var data = "";
+		if (typeof(menu_id) != 'undefined'){
+			data = 'data-menu="' + menu_id + '" data-day="' + day_id + '"'
+		}
 		var buffer = [];
-		buffer.push('<div data-class="' + this.className + '" data-key="' + this.id + '" class="mealToAdd draggable drag-drop">');
+		buffer.push('<div ' + data + ' data-class="' + this.className + '" data-key="' + this.id + '" class="mealToAdd draggable drag-drop">');
 		buffer.push('	<span class="name-meal">');
 		buffer.push(this.name);
 		buffer.push('	</span>');
@@ -138,7 +142,7 @@ function Menu(id, name,days) {
 		buffer.push('<td class="breakfast-head">' + domIds.breakfast.tableTitle + '</td>');
 		for (var i = 0; i < this.days.length; i++) {
 			var day = this.days[i];
-			buffer.push('<td data-class="' + domIds.breakfast.className + '" data-menu="' + this.id + '" data-day="' + day.id + '" class="breakfast-cell dropzone">' + day.breakfast.draw() + '</td>');
+			buffer.push('<td data-class="' + domIds.breakfast.className + '" data-menu="' + this.id + '" data-day="' + day.id + '" class="breakfast-cell dropzone">' + day.breakfast.draw(this.id, day.id) + '</td>');
 		};
 		buffer.push('</tr>');
 		return buffer.join("");
@@ -149,7 +153,7 @@ function Menu(id, name,days) {
 		buffer.push('<td class="lunch-head">' + domIds.lunch.tableTitle + '</td>');
 		for (var i = 0; i < this.days.length; i++) {
 			var day = this.days[i];
-			buffer.push('<td  data-class="' + domIds.lunch.className + '" data-menu="' + this.id + '" data-day="' + day.id + '"  class="lunch-cell dropzone">' + day.lunch.draw() + '</td>');
+			buffer.push('<td  data-class="' + domIds.lunch.className + '" data-menu="' + this.id + '" data-day="' + day.id + '"  class="lunch-cell dropzone">' + day.lunch.draw(this.id, day.id) + '</td>');
 		};		
 		buffer.push('</tr>');
 		return buffer.join("");
@@ -160,7 +164,7 @@ function Menu(id, name,days) {
 		buffer.push('<td class="dinner-head">' + domIds.dinner.tableTitle + '</td>');
 		for (var i = 0; i < this.days.length; i++) {
 			var day = this.days[i];
-			buffer.push('<td  data-class="' + domIds.dinner.className + '" data-menu="' + this.id + '" data-day="' + day.id + '" class="dinner-cell dropzone">' + day.dinner.draw() + '</td>');
+			buffer.push('<td  data-class="' + domIds.dinner.className + '" data-menu="' + this.id + '" data-day="' + day.id + '" class="dinner-cell dropzone">' + day.dinner.draw(this.id, day.id) + '</td>');
 		};		
 		buffer.push('</tr>');		
 		return buffer.join("");
@@ -236,7 +240,7 @@ Menu.clear = function(menu_id) {
 
 Menu.save = function(menu_id) {
 	var menu = Menu.findById(menu_id);
-	console.log(menu);
+	
 	$.ajax({
 	  type: "POST",
 	  url: url_actions.saveMenu,
@@ -247,7 +251,7 @@ Menu.save = function(menu_id) {
 
 Menu.print = function(menu_id) {
 	var menu = Menu.findById(menu_id);
-	console.log(menu);
+	
 	$.ajax({
 	  type: "POST",
 	  url: url_actions.printMenu,
@@ -277,8 +281,13 @@ Menu.addMeal = function(menu_id, meal_id, day_id) {
 	var menu = Menu.findById(menu_id);
 	var day = Day.findInMenu(menu, day_id);
 	day.addMeal(mealToAdd);
-	console.log(Menu.findById(menu_id));
+}
 
+Menu.removeMeal = function(menu_id, meal_id, day_id) {
+	var mealToRemove = Meal.findById(meal_id);
+	var menu = Menu.findById(menu_id);
+	var day = Day.findInMenu(menu, day_id);
+	day.removeMeal(mealToRemove);
 }
 
 
@@ -296,11 +305,11 @@ function Day(id, name, breakfast, lunch, dinner, first_collation, second_collati
 	this.first_collation = (first_collation instanceof Collation ? first_collation : new Collation());
 	this.second_collation = (second_collation instanceof Collation ? second_collation : new Collation());
 	this.totalCalories = function() {
-		console.log(this.breakfast.calories)
-		console.log(this.lunch.calories)
-		console.log(this.dinner.calories)
-		console.log(this.first_collation.calories)
-		console.log(this.second_collation.calories)
+		
+		
+		
+		
+		
 		return this.breakfast.calories + this.lunch.calories + this.lunch.calories + this.first_collation.calories + this.second_collation.calories;
 	}
 
@@ -310,20 +319,28 @@ function Day(id, name, breakfast, lunch, dinner, first_collation, second_collati
 
 	}
 
-	this.addMeal = function(meal) {
-		console.log(meal)
+	this.addMeal = function(meal) {	
 		if (meal instanceof BreakFast && this.breakfast.id == undefined) {
 			this.breakfast = meal;
-			console.log("b");
 		}
 		if (meal instanceof Lunch && this.lunch.id == undefined) {
 			this.lunch = meal;
-			console.log("l");
 		}
 		if (meal instanceof Dinner && this.dinner.id == undefined) {
 			this.dinner = meal;
-			console.log("d");
 		}				
+	}
+
+	this.removeMeal = function(meal) {
+		if (meal instanceof BreakFast) {
+			this.breakfast = new BreakFast();
+		}
+		if (meal instanceof Lunch) {
+			this.lunch = new Lunch;
+		}
+		if (meal instanceof Dinner) {
+			this.dinner = new Dinner;
+		}			
 	}
 }
 
