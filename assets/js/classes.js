@@ -139,7 +139,7 @@ function Menu(id, name,days) {
 	this.drawBreakfastRow = function() {
 		var buffer = [];
 		buffer.push('<tr class="meal-cell" >');
-		buffer.push('<td class="breakfast-head">' + domIds.breakfast.tableTitle + '</td>');
+		buffer.push('<td class="breakfast-head meal-head">' + domIds.breakfast.tableTitle + '</td>');
 		for (var i = 0; i < this.days.length; i++) {
 			var day = this.days[i];
 			buffer.push('<td data-class="' + domIds.breakfast.className + '" data-menu="' + this.id + '" data-day="' + day.id + '" class="breakfast-cell dropzone">' + day.breakfast.draw(this.id, day.id) + '</td>');
@@ -150,7 +150,7 @@ function Menu(id, name,days) {
 	this.drawLunchRow = function() {
 		var buffer = [];
 		buffer.push('<tr class="meal-cell" >');
-		buffer.push('<td class="lunch-head">' + domIds.lunch.tableTitle + '</td>');
+		buffer.push('<td class="lunch-head meal-head">' + domIds.lunch.tableTitle + '</td>');
 		for (var i = 0; i < this.days.length; i++) {
 			var day = this.days[i];
 			buffer.push('<td  data-class="' + domIds.lunch.className + '" data-menu="' + this.id + '" data-day="' + day.id + '"  class="lunch-cell dropzone">' + day.lunch.draw(this.id, day.id) + '</td>');
@@ -161,7 +161,7 @@ function Menu(id, name,days) {
 	this.drawDinnerRow = function() {
 		var buffer = [];
 		buffer.push('<tr class="meal-cell" >');
-		buffer.push('<td class="dinner-head">' + domIds.dinner.tableTitle + '</td>');
+		buffer.push('<td class="dinner-head meal-head">' + domIds.dinner.tableTitle + '</td>');
 		for (var i = 0; i < this.days.length; i++) {
 			var day = this.days[i];
 			buffer.push('<td  data-class="' + domIds.dinner.className + '" data-menu="' + this.id + '" data-day="' + day.id + '" class="dinner-cell dropzone">' + day.dinner.draw(this.id, day.id) + '</td>');
@@ -173,7 +173,7 @@ function Menu(id, name,days) {
 
 		var buffer = [];
 		buffer.push('<tr>');
-		buffer.push('<td  class="collation-head">' + domIds.collation.tableTitle + '</td>');	
+		buffer.push('<td  class="collation-head meal-head">' + domIds.collation.tableTitle + '</td>');	
 		for (var i = 0; i < this.days.length; i++) {
 			var day = this.days[i];
 			var collation = first ? day.first_collation.draw() : day.second_collation.draw();

@@ -24,6 +24,9 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f5fbff', end
 	background: #f5fbff; /* Old browsers */
 }
 
+.meal-head {
+	width: 50px;
+}
 .title-meal {
 	color:#09C;
 	font-size: 13px;
@@ -89,6 +92,8 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f5fbff', end
 	color:#fff; 
 	font-family:'Trebuchet MS', Arial, Helvetica, sans-serif; 
 	text-align:center;
+	min-width: 90px;
+	max-width: 90px;
 }
 
 .collation-head {
@@ -104,6 +109,8 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f5fbff', end
 	color:#fff; 
 	font-family:'Trebuchet MS', Arial, Helvetica, sans-serif; 
 	text-align:center;
+	min-width: 90px;
+	max-width: 90px;	
 }
 
 .lunch-head {
@@ -120,6 +127,8 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f5fbff', end
 	font-family:'Trebuchet MS', Arial, Helvetica, sans-serif; 
 	text-align:center; 
 	font-weight:lighter;
+	min-width: 90px;
+	max-width: 90px;	
 }
 
 .dinner-head {
@@ -135,6 +144,8 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f5fbff', end
 	color:#fff; 
 	font-family:'Trebuchet MS', Arial, Helvetica, sans-serif; 
 	text-align:center;
+	min-width: 90px;
+	max-width: 90px;	
 }
 
 .draggable{
