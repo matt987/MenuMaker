@@ -246,8 +246,11 @@ Menu.save = function(menu_id) {
 	$.ajax({
 	  type: "POST",
 	  url: url_actions.saveMenu,
-	  data: JSON.stringify(menu),
-	  dataType: 'html'
+	  data: {"menu": JSON.stringify(menu)},
+	  dataType: 'html',
+	  success: function(data) {
+	  	$("#ajax-return").html(data);
+	  }
 	});
 }
 
@@ -257,8 +260,11 @@ Menu.print = function(menu_id) {
 	$.ajax({
 	  type: "POST",
 	  url: url_actions.printMenu,
-	  data: JSON.stringify(menu),
-	  dataType: 'html'
+	  data: {"menu": JSON.stringify(menu)},
+	  dataType: 'html',
+	  success: function(data) {
+	  	$("#ajax-return").html(data);
+	  }	  
 	});
 }
 
