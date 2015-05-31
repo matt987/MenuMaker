@@ -324,8 +324,10 @@ function Day(id, name, breakfast, lunch, dinner, first_collation, second_collati
 	this.dinner = (dinner instanceof Dinner ? dinner : new Dinner());
 	this.first_collation = (first_collation instanceof Collation ? first_collation : new Collation());
 	this.second_collation = (second_collation instanceof Collation ? second_collation : new Collation());
+	this.calories = this.breakfast.calories + this.lunch.calories + this.dinner.calories + this.first_collation.calories + this.second_collation.calories;
 	this.totalCalories = function() {
-		return this.breakfast.calories + this.lunch.calories + this.dinner.calories + this.first_collation.calories + this.second_collation.calories;
+		this.calories = this.breakfast.calories + this.lunch.calories + this.dinner.calories + this.first_collation.calories + this.second_collation.calories;
+		return this.calories;
 	}
 
 	this.draw = function() {
