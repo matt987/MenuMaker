@@ -249,7 +249,7 @@ Menu.save = function(menu_id) {
 	  data: {"menu": JSON.stringify(menu)},
 	  dataType: 'html',
 	  success: function(data) {
-	  	$("#ajax-return").html(data);
+	  	window.location = url_actions.saveMenu
 	  }
 	});
 }
@@ -263,7 +263,7 @@ Menu.print = function(menu_id) {
 	  data: {"menu": JSON.stringify(menu)},
 	  dataType: 'html',
 	  success: function(data) {
-	  	$("#ajax-return").html(data);
+	  	window.location = url_actions.printMenu
 	  }	  
 	});
 }
