@@ -241,31 +241,42 @@ Menu.clear = function(menu_id) {
 }
 
 Menu.save = function(menu_id) {
+	// var menu = Menu.findById(menu_id);
 	var menu = Menu.findById(menu_id);
-	
-	$.ajax({
-	  type: "POST",
-	  url: url_actions.saveMenu,
-	  data: {"menu": JSON.stringify(menu)},
-	  dataType: 'html',
-	  success: function(data) {
-	  	window.location = url_actions.saveMenu
-	  }
-	});
+	var form = [];
+	form.push('<form action="' + url_actions.saveMenu + '">');
+	form.push('<input type="hidden" name="menu" value="' + JSON.stringify(menu)} + '">');
+	form.push('</form>');	
+	formJquery = $(form.join(""));
+	formJquery.submit();	
+	// $.ajax({
+	//   type: "POST",
+	//   url: url_actions.saveMenu,
+	//   data: {"menu": JSON.stringify(menu)},
+	//   dataType: 'html',
+	//   success: function(data) {
+	//   	window.location = url_actions.saveMenu
+	//   }
+	// });
 }
 
 Menu.print = function(menu_id) {
 	var menu = Menu.findById(menu_id);
-	
-	$.ajax({
-	  type: "POST",
-	  url: url_actions.printMenu,
-	  data: {"menu": JSON.stringify(menu)},
-	  dataType: 'html',
-	  success: function(data) {
-	  	window.location = url_actions.printMenu
-	  }	  
-	});
+	var form = [];
+	form.push('<form action="' + url_actions.printMenu + '">');
+	form.push('<input type="hidden" name="menu" value="' + JSON.stringify(menu)} + '">');
+	form.push('</form>');	
+	formJquery = $(form.join(""));
+	formJquery.submit();
+	// $.ajax({
+	//   type: "POST",
+	//   url: url_actions.printMenu,
+	//   data: {"menu": JSON.stringify(menu)},
+	//   dataType: 'html',
+	//   success: function(data) {
+	//   	window.location = url_actions.printMenu
+	//   }	  
+	// });
 }
 
 Menu.doAction = function(menu_id, action) {
