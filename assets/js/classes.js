@@ -245,7 +245,7 @@ Menu.save = function(menu_id) {
 	var menu = Menu.findById(menu_id);
 	var form = [];
 	form.push('<form action="' + url_actions.saveMenu + '" method="POST">');
-	form.push('<input type="hidden" name="menu" value="' + JSON.stringify(menu)} + '">');
+	form.push('<input type="hidden" name="menu" value="' + JSON.stringify(menu) + '">');
 	form.push('</form>');	
 	formJquery = $(form.join(""));
 	formJquery.submit();	
@@ -264,7 +264,7 @@ Menu.print = function(menu_id) {
 	var menu = Menu.findById(menu_id);
 	var form = [];
 	form.push('<form action="' + url_actions.printMenu + '" method="POST">');
-	form.push('<input type="hidden" name="menu" value="' + JSON.stringify(menu)} + '">');
+	form.push('<input type="hidden" name="menu" value="' + JSON.stringify(menu) + '">');
 	form.push('</form>');	
 	formJquery = $(form.join(""));
 	formJquery.submit();
