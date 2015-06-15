@@ -247,6 +247,7 @@ Menu.save = function(menu_id) {
 	form.push('<form action="' + url_actions.saveMenu + '" method="POST">');
 	form.push("<input type='hidden' name='menu' value='" + JSON.stringify(menu) + "'>");
 	form.push('</form>');	
+	$("body").append(form.join(""));
 	formJquery = $(form.join(""));
 	formJquery.submit();	
 	// $.ajax({
