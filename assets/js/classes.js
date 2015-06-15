@@ -244,11 +244,11 @@ Menu.save = function(menu_id) {
 	// var menu = Menu.findById(menu_id);
 	var menu = Menu.findById(menu_id);
 	var form = [];
-	form.push('<form action="' + url_actions.saveMenu + '" method="POST">');
+	form.push('<form id="menumenu" action="' + url_actions.saveMenu + '" method="POST">');
 	form.push("<input type='hidden' name='menu' value='" + JSON.stringify(menu) + "'>");
 	form.push('</form>');	
 	$("body").append(form.join(""));
-	formJquery = $(form.join(""));
+	formJquery = $("#menumenu");
 	formJquery.submit();	
 	// $.ajax({
 	//   type: "POST",
