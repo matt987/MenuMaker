@@ -93,14 +93,14 @@ Dinner.prototype.constructor = Dinner;
 * Collation class
 *
 **/
-function Collation(id, name, description, calories, image) {
+function Collation(id, name, description, calories, image, second_collation) {
 	Meal.call(this, id, name, description, calories, image, domIds.collation.className);
 	this.domListId = domIds.collation.id;
 	this.first_collation = false;
-	this.second_collation = false;
-	// this.draw = function() {
-	// 	return this.name;
-	// }
+	this.second_collation = second_collation ? true : false;
+	this.drawSecond = function() {
+		return this.name;
+	}
 }
 Collation.prototype = Object.create(Meal.prototype);    
 Collation.prototype.constructor = Collation;
@@ -191,9 +191,13 @@ function Menu(id, name,days) {
 		buffer.push('<td  class="collation-head meal-head">' + domIds.collation.tableTitle + '</td>');	
 		for (var i = 0; i < this.days.length; i++) {
 			var day = this.days[i];
-			var collation = first ? day.first_collation.draw(this.id, day.id) : day.second_collation.draw(this.id, day.id);
-			var firstSecond = first ? domIds.collation.firstClass : domIds.collation.secondClass
-			buffer.push('<td data-class="' + domIds.collation.className + '" data-menu="' + this.id + '" data-day="' + day.id + '" class="collation-cell dropzone" data-collation="' + firstSecond + '">' + collation + '</td>');
+			var collation = first ? day.first_collation.draw(this.id, day.id) : day.second_collation.drawSecond();
+			var firstSecond = first ? domIds.collation.firstClass : domIds.collation.secondClass;
+			if (first) {
+				buffer.push('<td data-class="' + domIds.collation.className + '" data-menu="' + this.id + '" data-day="' + day.id + '" class="collation-cell dropzone" data-collation="' + firstSecond + '">' + collation + '</td>');
+			} else {
+				buffer.push('<td class="collation-cell">' + collation + '</td>');
+			}
 		};	
 		buffer.push('</tr>');
 		return buffer.join("");
@@ -234,14 +238,20 @@ Menu.findById = function(menu_id) {
 }
 
 Menu.clear = function(menu_id) {
-	var c = collations[0];
+	var collation;
+	for (var i = database.meals.length - 1; i >= 0; i--) {
+		if (database.meals[i] instanceof Collation && database.meals[i].second_collation) {
+			collation = database.meals[i];
+			break;
+		}
+	};
 
 	for (var i = 0; i < database.menus.length; i++) {
 		var menu = database.menus[i];
 		if (menu.id === parseInt(menu_id)){
 			var days = [];
 			for (var j = 0; j < menu.days.length; j++) {
-				var day = new Day(j+1,menu.days[j].name, null, null, null, null, null);
+				var day = new Day(j+1,menu.days[j].name, null, null, null, null, collation);
 				days.push(day);
 			};
 			menu.days = days;

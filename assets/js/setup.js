@@ -48,20 +48,24 @@ function loadToDB() {
 		var class_name = meals[j][1];
 		for (var i = specific_meals.length - 1; i >= 0; i--) {
 			var key = database.meals.length + 1;
-			var meal = new class_name(key, specific_meals[i].name, specific_meals[i].description, specific_meals[i].calories, specific_meals[i].image);
+			var meal = new class_name(key, specific_meals[i].name, specific_meals[i].description, specific_meals[i].calories, specific_meals[i].image, specific_meals[i].second_collation);
 			database.meals.push(meal);
 		};		
 	}
-	//Esto agrega la primer comida de colacion a la base de datos, no se tienen en cuenta si existieran mas.
-	// var c = collations[0];
-	// var key = database.meals.length + 1;
-	// var collation = new Collation(key, c.name, c.description, c.calories, c.image);
-	// database.meals.push(collation)	
+
+
+  var collation;
+  for (var i = database.meals.length - 1; i >= 0; i--) {
+    if (database.meals[i] instanceof Collation && database.meals[i].second_collation) {
+      collation = database.meals[i];
+      break;
+    }
+  };
 
 	for (var i = 0; i < menus.length; i++) {
 		var days = [];
 		for (var j = 0; j < menus[i].days.length; j++) {
-			var day = new Day(j+1,menus[i].days[j], null, null, null, null, null);
+			var day = new Day(j+1,menus[i].days[j], null, null, null, null, collation);
 			days.push(day);
 		};
 		var key = database.menus.length + 1;
