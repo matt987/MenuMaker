@@ -17,7 +17,7 @@ var domIds = {
 			resetButton: '<i class="fa fa-cog fa-spin"></i> Resetear/limpiar', 
 			printButton: '<i class="fa fa-print"></i> Imprimir', 
 			saveButton: '<i class="fa fa-floppy-o"></i> Guardar'},
-	collation: {tableTitle: "Colación", className: "collationMeal"}
+	collation: {id: "collation-list",title: "Colación", tableTitle: "Colación", className: "collationMeal", firstClass: "first", secondClass: "second"}
 }
 
 //url de las imagenes de las comidas
@@ -59,7 +59,10 @@ var dinners = [
 
 //Esta variable tiene la lista de colaciones, actualmente solo se maneja una para todos los menus
 var collations = [
-	{name:"7 onzas de leche", description: "", calories: 1, image: ""}
+	{name:"7 onzas de leche", description: "", calories: 1, image: images_url + "colacion1.png"},
+	{name:"6 onzas de leche", description: "", calories: 1, image: images_url + "colacion1.png"},
+	{name:"5 onzas de leche", description: "", calories: 1, image: images_url + "colacion1.png"},
+	{name:"4 onzas de leche", description: "", calories: 1, image: images_url + "colacion1.png"}
 ]
 
 
