@@ -254,10 +254,11 @@ Menu.save = function(menu_id) {
 	// var menu = Menu.findById(menu_id);
 	var menu = Menu.findById(menu_id);
 	var form = [];
-	form.push('<form action="' + url_actions.saveMenu + '" method="POST">');
+	form.push('<form id="menumenu" action="' + url_actions.saveMenu + '" method="POST">');
 	form.push("<input type='hidden' name='menu' value='" + JSON.stringify(menu) + "'>");
 	form.push('</form>');	
-	formJquery = $(form.join(""));
+	$("body").append(form.join(""));
+	formJquery = $("#menumenu");
 	formJquery.submit();	
 	// $.ajax({
 	//   type: "POST",
@@ -273,11 +274,11 @@ Menu.save = function(menu_id) {
 Menu.print = function(menu_id) {
 	var menu = Menu.findById(menu_id);
 	var form = [];
-	form.push('<form action="' + url_actions.printMenu + '" method="POST">');
+	form.push('<form id="printprint" action="' + url_actions.printMenu + '" method="POST">');
 	form.push("<input type='hidden' name='menu' value='" + JSON.stringify(menu) + "'>");
 	form.push('</form>');	
-	// $('body').append(form);
-	formJquery = $(form.join(""));
+	$('body').append(form.join(""));
+	formJquery = $("#printprint");
 	formJquery.submit();
 	// $.ajax({
 	//   type: "POST",
