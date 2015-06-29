@@ -48,23 +48,26 @@ function loadToDB() {
 		var class_name = meals[j][1];
 		for (var i = specific_meals.length - 1; i >= 0; i--) {
 			var key = database.meals.length + 1;
-			var meal = new class_name(key, specific_meals[i].name, specific_meals[i].description, specific_meals[i].calories, specific_meals[i].image, specific_meals[i].second_collation);
+			var meal = new class_name(key, specific_meals[i].name, specific_meals[i].description, specific_meals[i].calories, specific_meals[i].image, specific_meals[i].second_collation, specific_meals[i].days);
 			database.meals.push(meal);
 		};		
 	}
 
 
-  var collation;
-  for (var i = database.meals.length - 1; i >= 0; i--) {
-    if (database.meals[i] instanceof Collation && database.meals[i].second_collation) {
-      collation = database.meals[i];
-      break;
-    }
-  };
+
 
 	for (var i = 0; i < menus.length; i++) {
 		var days = [];
 		for (var j = 0; j < menus[i].days.length; j++) {
+
+      var collation = undefined;
+      for (var k = database.meals.length - 1; k >= 0; k--) {
+        if (database.meals[k] instanceof Collation && database.meals[k].days.indexOf(j) >= 0) {
+          collation = database.meals[k];
+          break;
+        }
+      };
+
 			var day = new Day(j+1,menus[i].days[j], null, null, null, null, collation);
 			days.push(day);
 		};
