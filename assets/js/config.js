@@ -59,11 +59,11 @@ var dinners = [
 
 //Esta variable tiene la lista de colaciones, actualmente solo se maneja una para todos los menus
 var collations = [
-	{name:"7 onzas de leche", description: "", calories: 1, image: images_url + "colacion1.png", second_collation: "second", days: [3,4,5,6]},
-	{name:"6 onzas de leche", description: "", calories: 1, image: images_url + "colacion1.png"},
+	{name:"7 onzas de leche", description: "", calories: 1, image: images_url + "colacion1.png", second_collation: "second", days: {'Menu 1': [3,4,5,6]}},
+	{name:"6 onzas de leche", description: "", calories: 1, image: images_url + "colacion1.png", second_collation: "second", days: {'Menu 1': [1] ,'Menu 2': [3,4,5,6]}},
 	{name:"5 onzas de leche", description: "", calories: 1, image: images_url + "colacion1.png"},
 	{name:"4 onzas de leche", description: "", calories: 1, image: images_url + "colacion1.png"},
-	{name:"8 litros de leche", description: "", calories: 4, image: images_url + "colacion1.png", second_collation: "second", days: [0,1,2]},
+	{name:"8 litros de leche", description: "", calories: 4, image: images_url + "colacion1.png", second_collation: "second", days: {'Menu 1': [0,2]}},
 ]
 
 

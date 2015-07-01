@@ -98,7 +98,7 @@ function Collation(id, name, description, calories, image, second_collation, day
 	this.domListId = domIds.collation.id;
 	this.first_collation = false;
 	this.second_collation = second_collation ? true : false;
-	this.days = second_collation ? days : [];
+	this.days = second_collation ? days : {};
 	this.drawSecond = function() {
 		return this.name;
 	}
@@ -240,25 +240,24 @@ Menu.findById = function(menu_id) {
 
 Menu.clear = function(menu_id) {
 	var collation;
-	// for (var i = database.meals.length - 1; i >= 0; i--) {
-	// 	if (database.meals[i] instanceof Collation && database.meals[i].second_collation) {
-	// 		collation = database.meals[i];
-	// 		break;
-	// 	}
-	// };
 
 	for (var i = 0; i < database.menus.length; i++) {
 		var menu = database.menus[i];
 		if (menu.id === parseInt(menu_id)){
 			var days = [];
 			for (var j = 0; j < menu.days.length; j++) {
-			      var collation = undefined;
-			      for (var k = database.meals.length - 1; k >= 0; k--) {
-			        if (database.meals[k] instanceof Collation && database.meals[k].days.indexOf(j) >= 0) {
-			          collation = database.meals[k];
-			          break;
-			        }
-			      };
+
+	      var collation = undefined;
+	      for (var k = database.meals.length - 1; k >= 0; k--) {
+	        var tmp_meal = database.meals[k];
+	        var tmp_days = tmp_meal.days;
+	        if (tmp_meal instanceof Collation && !$.isEmptyObject(tmp_days)) {
+	          if (tmp_days[menu.name] !== undefined && tmp_days[menu.name].indexOf(j) >= 0) {
+	            collation = tmp_meal;
+	            break;
+	          }
+	        }
+	      };
 				var day = new Day(j+1,menu.days[j].name, null, null, null, null, collation);
 				days.push(day);
 			};

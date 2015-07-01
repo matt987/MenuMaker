@@ -58,21 +58,25 @@ function loadToDB() {
 
 	for (var i = 0; i < menus.length; i++) {
 		var days = [];
-		for (var j = 0; j < menus[i].days.length; j++) {
-
+    var tmp_menu = menus[i]
+		for (var j = 0; j < tmp_menu.days.length; j++) {
       var collation = undefined;
       for (var k = database.meals.length - 1; k >= 0; k--) {
-        if (database.meals[k] instanceof Collation && database.meals[k].days.indexOf(j) >= 0) {
-          collation = database.meals[k];
-          break;
+        var tmp_meal = database.meals[k];
+        var tmp_days = tmp_meal.days;
+        if (tmp_meal instanceof Collation && !$.isEmptyObject(tmp_days)) {
+          if (tmp_days[tmp_menu.name] !== undefined && tmp_days[tmp_menu.name].indexOf(j) >= 0) {
+            collation = tmp_meal;
+            break;
+          }
         }
       };
 
-			var day = new Day(j+1,menus[i].days[j], null, null, null, null, collation);
+			var day = new Day(j+1,tmp_menu.days[j], null, null, null, null, collation);
 			days.push(day);
 		};
 		var key = database.menus.length + 1;
-		var menu = new Menu(key, menus[i].name, days);
+		var menu = new Menu(key, tmp_menu.name, days);
 		database.menus.push(menu);
 	};	
 
