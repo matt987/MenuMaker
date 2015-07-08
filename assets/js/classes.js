@@ -382,8 +382,8 @@ function Day(id, name, breakfast, lunch, dinner, first_collation, second_collati
 			} 
 			if (meal.second_collation && this.second_collation.id == undefined) {
 				this.second_collation = meal;
-				this.first_collation.first_collation = false;
-				this.first_collation.second_collation = true;				
+				this.second_collation.first_collation = false;
+				this.second_collation.second_collation = true;				
 			}
 		}
 	}
@@ -401,8 +401,12 @@ function Day(id, name, breakfast, lunch, dinner, first_collation, second_collati
 		if (meal instanceof Collation) {
 			if (meal.first_collation) {
 				this.first_collation = new Collation();
+				this.first_collation.first_collation = true;
+				this.first_collation.second_collation = false;				
 			} else {
 				this.second_collation = new Collation();
+				this.second_collation.first_collation = false;
+				this.second_collation.second_collation = true;				
 			}
 		}			
 	}
