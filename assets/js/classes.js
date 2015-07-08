@@ -377,9 +377,13 @@ function Day(id, name, breakfast, lunch, dinner, first_collation, second_collati
 		if (meal instanceof Collation ) {
 			if (meal.first_collation && this.first_collation.id == undefined) {
 				this.first_collation = meal;
+				this.first_collation.first_collation = true;
+				this.first_collation.second_collation = false;
 			} 
 			if (meal.second_collation && this.second_collation.id == undefined) {
 				this.second_collation = meal;
+				this.first_collation.first_collation = false;
+				this.first_collation.second_collation = true;				
 			}
 		}
 	}
