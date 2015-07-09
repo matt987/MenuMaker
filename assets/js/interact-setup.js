@@ -52,9 +52,9 @@ function interactSetup () {
       var related_menu_id = event.relatedTarget.getAttribute('data-menu');
       var related_day_id = event.relatedTarget.getAttribute('data-day');
       var meal_id = event.relatedTarget.getAttribute('data-key');
-
+      var collation = event.target.getAttribute('data-collation');
       if (related_day_id && related_menu_id){
-        Menu.removeMeal(related_menu_id, meal_id, related_day_id);
+        Menu.removeMeal(related_menu_id, meal_id, related_day_id,collation);
       }
       drawMenus();
     }
